@@ -17,4 +17,18 @@ class Order extends Model
         }
         return $sum;
     }
+    public function saveOrder($name,$phone,$town){
+
+        if($this->status==0) {
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->town = $town;
+            $this ->status=1;
+            $this ->save();
+            session()->flush();
+            return true;
+        }
+        else return false;
+
+    }
 }

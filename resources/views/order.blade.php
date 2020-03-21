@@ -2,12 +2,11 @@
 @section('title', 'Оформить заказ')
 
 @section('content')
-<div class="starter-template">
     <h1>Подтвердите заказ:</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <p>Общая стоимость: <b>0 ₽.</b></p>
-            <form action="http://internet-shop.tmweb.ru/basket/place" method="POST">
+            <p>Общая стоимость: <b>{{$order->getFullPrice()}} ₽.</b></p>
+            <form action="{{route('orderConfirm')}}" method="POST">
                 <div>
                     <p>Укажите свои имя и номер телефона, чтобы наш менеджер мог с вами связаться:</p>
 
@@ -29,17 +28,17 @@
                         <br>
                         <br>
                         <div class="form-group">
-                            <label for="name" class="control-label col-lg-offset-3 col-lg-2">Email: </label>
+                            <label for="name" class="control-label col-lg-offset-3 col-lg-2">Город: </label>
                             <div class="col-lg-4">
-                                <input type="text" name="email" id="email" value="" class="form-control">
+                                <input type="text" name="town" id="town" value="" class="form-control">
                             </div>
                         </div>
                     </div>
                     <br>
-                    <input type="hidden" name="_token" value="d6WIgdEujpQTGH878vuYvZNIKqyZtC5D9635YEw6">                    <input type="submit" class="btn btn-success" value="Подтвердите заказ">
+                    @csrf
+                    <input type="submit" class="btn btn-success" value="Подтвердите заказ">
                 </div>
             </form>
         </div>
     </div>
-</div>
 @endsection
