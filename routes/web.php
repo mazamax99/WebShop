@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes([
+    'reset'=>false,
+    'confirm'=>false,
+    'verify'=>false,
+]);
 
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('/orders', 'HomeController@index')->name('orders');
+});
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::get('/', 'MainController@index')->name('index');
-
 Route::get('/categories', 'MainController@categories')->name('categories');
 Route::get('/basket', 'BasketController@basket')->name('basket');
 Route::get('/basket/place', 'BasketController@order')->name('order');
@@ -26,3 +35,11 @@ Route::get('/{category}', 'MainController@category')->name('category');
 Route::get('/{category}/{product?}', 'MainController@product')->name('product');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

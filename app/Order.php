@@ -10,6 +10,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function getFullPrice(){
         $sum=0;
         foreach ($this->products as $product){
@@ -25,7 +28,7 @@ class Order extends Model
             $this->town = $town;
             $this ->status=1;
             $this ->save();
-            session()->flush();
+            session()->forget($this->order);
             return true;
         }
         else return false;

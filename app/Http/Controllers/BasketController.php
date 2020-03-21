@@ -39,7 +39,7 @@ class BasketController extends Controller
                 session()->flash('success','Ваш заказ принят в обработку. Наш менеджер свяжется с вами в ближайшее время.');
             }
             else
-                session()->flash('denied','Мусора лежатб');
+                session()->flash('denied','Ошибка');
 
         }
         return redirect()->route('index');
