@@ -20,17 +20,23 @@ Auth::routes([
 ]);
 
 Route::group(['middleware'=>'auth'], function (){
-    Route::get('/orders', 'HomeController@index')->name('orders');
+    Route::group(['middleware'=>'is_admin'], function () {
+        Route::get('/orders', 'HomeController@index')->name('orders');
+    });
+
 });
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::get('/', 'MainController@index')->name('index');
 Route::get('/categories', 'MainController@categories')->name('categories');
-Route::get('/basket', 'BasketController@basket')->name('basket');
-Route::get('/basket/place', 'BasketController@order')->name('order');
-Route::post('/basket/place', 'BasketController@orderConfirm')->name('orderConfirm');
+Route::group(['middleware'=>'empty_basket'], function () {
+    Route::get('/basket', 'BasketController@basket')->name('basket');
+    Route::get('/basket/place', 'BasketController@order')->name('order');
+    Route::post('/basket/place', 'BasketController@orderConfirm')->name('orderConfirm');
+});
 Route::post('/basket/add/{id}', 'BasketController@basketAdd')->name('basket-add');
 Route::post('/basket/remove/{id}', 'BasketController@basketRemove')->name('basket-remove');
+
 Route::get('/{category}', 'MainController@category')->name('category');
 Route::get('/{category}/{product?}', 'MainController@product')->name('product');
 

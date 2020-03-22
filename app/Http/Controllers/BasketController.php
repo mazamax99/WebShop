@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
@@ -63,6 +64,11 @@ class BasketController extends Controller
            $pivotRow=$order->products()->where('product_id',$productId)->first()->pivot;
            if($pivotRow->count==0)
                $pivotRow->count==1;
+       }
+
+       if(Auth::check()){
+           $order->userId=Auth::id();
+           $order->save();
        }
         $product=Product::find($productId);
        session()->flash('success','Добавлен товар: '. $product->name);
