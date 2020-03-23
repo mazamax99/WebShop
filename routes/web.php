@@ -19,13 +19,15 @@ Auth::routes([
     'verify'=>false,
 ]);
 
-Route::group(['middleware'=>'auth'], function (){
+Route::group(['prefix'=>'admin'], function (){
+
     Route::group(['middleware'=>'is_admin'], function () {
         Route::get('/orders', 'HomeController@index')->name('orders');
     });
-
+    Route::resource('categories', 'Admin\CategoryController');
 });
-
+Route::get('/social-auth/{provider}', 'Auth\SocialController@redirectToProvider')->name('auth.social');
+Route::get('/social-auth/{provider}/callback', 'Auth\SocialController@handleProviderCallback')->name('auth.social.callback');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 Route::get('/', 'MainController@index')->name('index');
 Route::get('/categories', 'MainController@categories')->name('categories');
@@ -39,12 +41,6 @@ Route::post('/basket/remove/{id}', 'BasketController@basketRemove')->name('baske
 
 Route::get('/{category}', 'MainController@category')->name('category');
 Route::get('/{category}/{product?}', 'MainController@product')->name('product');
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

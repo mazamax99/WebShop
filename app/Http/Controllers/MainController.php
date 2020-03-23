@@ -15,6 +15,7 @@ class MainController extends Controller
     public function categories(){
         $categories=Category::get();
         return view('categories',compact('categories'));
+
     }
     public function category($code){
         $category = Category::where('code',$code)->first();

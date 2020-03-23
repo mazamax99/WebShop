@@ -10,6 +10,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js" defer></script>
+    <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?34"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,6 +20,8 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
+
+
 </head>
 <body>
 <div id="app">
@@ -28,10 +31,19 @@
                 Вернуться на сайт
             </a>
 
+
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                 </ul>
+                @auth
+                    <a class="navbar-brand" href="{{route('categories.index')}}">
+                        Категории
+                    </a>
+                    <a class="navbar-brand" href="{{route('orders')}}">
+                        Заказы
+                    </a>
 
+                @endauth
                 <ul class="nav navbar-nav navbar-right">
                     @guest
                     <li class="nav-item">

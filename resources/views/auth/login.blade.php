@@ -1,5 +1,4 @@
 @extends('auth.authmaster')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -7,6 +6,7 @@
             <div class="card">
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">
@@ -48,7 +48,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -60,7 +59,18 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+
                             </div>
+                        </div>
+                        <div class="form-group row mb-4">
+                            <label for="" class="col-md-10 col-form-label text-md-right">{{ __('Войти через:') }}</label>
+                            <div class="btn-group" role="group">
+                                <a class="button" type="button"
+                                   href="{{ route('auth.social', 'github') }}" title="VK">
+                                    <img src="https://img.icons8.com/ios/50/000000/vk-com.png"/>
+                                </a>
+                            </div>
+                            </a>
                         </div>
                     </form>
                 </div>
