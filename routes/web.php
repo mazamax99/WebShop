@@ -25,6 +25,7 @@ Route::group(['prefix'=>'admin'], function (){
         Route::get('/orders', 'HomeController@index')->name('orders');
     });
     Route::resource('categories', 'Admin\CategoryController');
+    Route::resource('products', 'Admin\ProductController');
 });
 Route::get('/social-auth/{provider}', 'Auth\SocialController@redirectToProvider')->name('auth.social');
 Route::get('/social-auth/{provider}/callback', 'Auth\SocialController@handleProviderCallback')->name('auth.social.callback');

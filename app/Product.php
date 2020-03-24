@@ -11,6 +11,7 @@ class Product extends Model
 //
 //    }
   //возрат текущей категории товара - связь
+    protected $fillable= ['category_id','name','code','description', 'image','price'];
       public function category(){
         return $this->belongsTo(Category::class);
     }

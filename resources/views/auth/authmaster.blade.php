@@ -39,6 +39,9 @@
                     <a class="navbar-brand" href="{{route('categories.index')}}">
                         Категории
                     </a>
+                    <a class="navbar-brand" href="{{route('products.index')}}">
+                        Товары
+                    </a>
                     <a class="navbar-brand" href="{{route('orders')}}">
                         Заказы
                     </a>
