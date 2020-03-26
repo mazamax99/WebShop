@@ -108,8 +108,8 @@
 {{--                            >--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-                    <br>
-                @endforeach
+{{--                    <br>--}}
+{{--                @endforeach--}}
                 <button class="btn btn-success">Сохранить</button>
             </div>
         </form>
