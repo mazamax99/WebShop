@@ -28,7 +28,7 @@ class Order extends Model
             $this->town = $town;
             $this ->status=1;
             $this ->save();
-            session()->forget($this->order);
+            session()->forget('orderId');
             return true;
         }
         else return false;

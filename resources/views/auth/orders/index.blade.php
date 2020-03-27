@@ -37,7 +37,13 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <a class="btn btn-success" type="button"
-                                       href="http://internet-shop.tmweb.ru/person/orders/1"
+                                       @auth
+                                    @if(Auth::user()->isAdmin())
+                                    href="{{route('orderShow',$order)}}"
+                                       @else
+                                       href="{{route('orderShow.person',$order)}}"
+                                    @endif
+@endauth
                                     >Открыть</a>
                                 </div>
                             </td>

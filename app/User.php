@@ -40,4 +40,7 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->isAdmin===1;
     }
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

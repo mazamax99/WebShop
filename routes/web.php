@@ -18,15 +18,23 @@ Auth::routes([
     'confirm'=>false,
     'verify'=>false,
 ]);
-
-Route::group(['prefix'=>'admin'], function (){
-
-    Route::group(['middleware'=>'is_admin'], function () {
-        Route::get('/orders', 'HomeController@index')->name('orders');
+Route::middleware(['auth'])->group(function (){
+    Route::group(['prefix'=>'person'], function (){
+        Route::get('/orders', 'Person\OrderController@index')->name('orders.person');
+        Route::get('/orders/{order}', 'Person\OrderController@show')->name('orderShow.person');
     });
-    Route::resource('categories', 'Admin\CategoryController');
-    Route::resource('products', 'Admin\ProductController');
+    Route::group(['prefix'=>'admin'], function (){
+
+        Route::group(['middleware'=>'is_admin'], function () {
+
+            Route::resource('categories', 'Admin\CategoryController');
+            Route::resource('products', 'Admin\ProductController');
+            Route::get('/orders', 'Admin\OrderController@index')->name('orders');
+            Route::get('/orders/{order}', 'Admin\OrderController@show')->name('orderShow');
+        });
+    });
 });
+
 Route::get('/social-auth/{provider}', 'Auth\SocialController@redirectToProvider')->name('auth.social');
 Route::get('/social-auth/{provider}/callback', 'Auth\SocialController@handleProviderCallback')->name('auth.social.callback');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');

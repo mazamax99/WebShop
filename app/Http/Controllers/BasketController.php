@@ -67,7 +67,7 @@ class BasketController extends Controller
        }
 
        if(Auth::check()){
-           $order->userId=Auth::id();
+           $order->user_id=Auth::id();
            $order->save();
        }
         $product=Product::find($productId);

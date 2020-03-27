@@ -36,15 +36,17 @@
                 <ul class="nav navbar-nav">
                 </ul>
                 @auth
-                    <a class="navbar-brand" href="{{route('categories.index')}}">
-                        Категории
-                    </a>
-                    <a class="navbar-brand" href="{{route('products.index')}}">
-                        Товары
-                    </a>
-                    <a class="navbar-brand" href="{{route('orders')}}">
-                        Заказы
-                    </a>
+                    @if(Auth::user()->isAdmin())
+                        <a class="navbar-brand" href="{{route('categories.index')}}">
+                            Категории
+                        </a>
+                        <a class="navbar-brand" href="{{route('products.index')}}">
+                            Товары
+                        </a>
+                        <a class="navbar-brand" href="{{route('orders')}}">
+                            Заказы
+                        </a>
+                    @endif
 
                 @endauth
                 <ul class="nav navbar-nav navbar-right">
@@ -59,7 +61,11 @@
 
 
                     @auth
-                            <li><a href="{{route('orders')}}">Мои заказы</a></li>
+                            @if(Auth::user()->isAdmin())
+                                <li><a href="{{route('orders')}}">Панель администратора</a></li>
+                            @else
+                                <li><a href="{{route('orders.person')}}">Личный кабинет</a></li>
+                            @endif
                             <li><a href="{{route('get-logout')}}">Выйти</a></li>
                         @endauth
                 </ul>
@@ -67,7 +73,12 @@
             </div>
         </div>
     </nav>
-
+    @if(session()->has('success'))
+        <p class="alert alert-success">{{session()->get('success')}}</p>
+    @endif
+    @if(session()->has('denied'))
+        <p class="alert alert-warning">{{session()->get('denied')}}</p>
+    @endif
     <div class="py-4">
 @yield('content')
     </div>
