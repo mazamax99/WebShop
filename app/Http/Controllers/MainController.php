@@ -22,9 +22,10 @@ class MainController extends Controller
         return view('category',compact('category'));
         //dd($category);
     }
-    public function product($category,$product = null){
-        //dump($product);
-        return view('product', ['product'=>$product]);
+    public function product($category, $productCode)
+    {
+        $product = Product::where('code',$productCode)->firstOrFail();
+        return view('product', compact('product'));
     }
 
 }

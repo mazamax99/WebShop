@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,4 +34,5 @@ class HomeController extends Controller
         $products = $order->products()->withTrashed()->get();
         return view('auth.orders.show', compact('order', 'products'));
     }
+
 }

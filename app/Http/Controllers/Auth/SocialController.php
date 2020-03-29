@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\SocialAccount;
 use App\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -16,6 +17,7 @@ class SocialController extends Controller
     public function handleProviderCallback($provider)
     {
         $socialiteUser = Socialite::driver($provider)->user();
+        //dd($socialiteUser);
 
         $user = $this->findOrCreateUser($provider, $socialiteUser);
 
@@ -34,12 +36,35 @@ class SocialController extends Controller
 
             return $user;
         }
+        if($socialiteUser->name!=null&&$socialiteUser->email!=null){
+            $user = User::create([
+                'name' => $socialiteUser->getName(),
+                'email' => $socialiteUser->getEmail(),
+                'password' => bcrypt(25),
+            ]);
+        }
+        if($socialiteUser->name==null&&$socialiteUser->email!=null){
+            $user = User::create([
+                'name' => 'Anonim',
+                'email' => $socialiteUser->getEmail(),
+                'password' => bcrypt(25),
+            ]);
+        }
+        if($socialiteUser->name!=null&&$socialiteUser->email==null){
+            $user = User::create([
+                'name' => $socialiteUser->getName(),
+                'email' => $socialiteUser->token,
+                'password' => bcrypt(25),
+            ]);
+        }
+        if($socialiteUser->name==null&&$socialiteUser->email==null){
+            $user = User::create([
+                'name' => 'Anonim',
+                'email' => $socialiteUser->token,
+                'password' => bcrypt(25),
+            ]);
+        }
 
-        $user = User::create([
-            'name' => $socialiteUser->getName(),
-            'email' => $socialiteUser->getEmail(),
-            'password' => bcrypt(str_random(25)),
-        ]);
 
         $this->addSocialAccount($provider, $user, $socialiteUser);
 

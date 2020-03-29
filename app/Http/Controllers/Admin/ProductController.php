@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         if($request->has('image')){
-            $path=$request->file('image')->store('public/products');
+            $path=$request->file('image')->store('products');
         }
         else
             $path=null;
@@ -88,7 +88,7 @@ class ProductController extends Controller
         if($request->has('image')){
             Storage::delete($product->image);
         }
-        $path = $request->file('image')->store('public/products');
+        $path = $request->file('image')->store('products');
         $product->update(['category_id'=>$request->category_id,'code'=>$request->code,'name'=>$request->name,'image'=>$path,
             'price'=>$request->price, 'description'=>$request->description]);
         return redirect()->route('products.index');

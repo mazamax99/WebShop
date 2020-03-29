@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderConfirmRequest;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
@@ -30,11 +31,19 @@ class BasketController extends Controller
             return redirect()->route('index');
         return view('basket',compact('order'));
     }
-    public function orderConfirm(Request $request){
+    public function orderConfirm(OrderConfirmRequest $request){
+        $request->validate([
+            'town'=>'required',
+            'name'=>'required',
+            'phone'=>'required',
+            'car_manufacturer'=>'required',
+            'car_model'=>'required',
+            'year_manufacture'=>'required',
+        ]);
         $orderId=session('orderId');
         if(!is_null($orderId)) {
             $order = Order::find($orderId);
-            $result= $order->saveOrder($request->name,$request->phone,$request->town);
+            $result= $order->saveOrder($request->name,$request->phone,$request->town,$request->car_manufacturer,$request->car_model,$request->year_manufacturer);
 
             if($result){
                 session()->flash('success','Ваш заказ принят в обработку. Наш менеджер свяжется с вами в ближайшее время.');

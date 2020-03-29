@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'description'=>'required',
         ]);
         if($request->has('image')){
-            $path=$request->file('image')->store('public/categories');
+            $path=$request->file('image')->store('categories');
         }
         else
         $path=null;
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         Storage::delete($category->image);
-        $path=$request->file('image')->store('public/categories');
+        $path=$request->file('image')->store('categories');
         $category->update(['code'=>$request->code,'name'=>$request->name,'image'=>$path,'description'=>$request->description]);
         return redirect()->route('categories.index');
     }

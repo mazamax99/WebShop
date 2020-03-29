@@ -30,7 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'vkontakte' => [
-        'client_id' => env('	7370582'),
+        'client_id' => env('7370582'),
         'client_secret' => env('IoNq16Ihqu5t4TCu1gC0'),
         'redirect' => env('/social-auth/vkontakte/callback')
     ],
