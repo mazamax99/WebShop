@@ -66,10 +66,6 @@
                             <label for="" class="col-md-9 col-form-label text-md-right">{{ __('Войти через:') }}</label>
                             <div class="btn-group" role="group">
                                 <a class="button" type="button"
-                                   href="{{ route('auth.social', 'vkontakte') }}" title="VK">
-                                    <img src="https://img.icons8.com/ios/50/000000/vk-com.png"/>
-                                </a>
-                                <a class="button" type="button"
                                    href="{{ route('auth.social', 'github') }}" title="GitHUB">
                                     <img src="https://img.icons8.com/ios/50/000000/github.png"/>
                                 </a>
