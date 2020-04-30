@@ -43,7 +43,7 @@ class BasketController extends Controller
         $orderId=session('orderId');
         if(!is_null($orderId)) {
             $order = Order::find($orderId);
-            $result= $order->saveOrder($request->name,$request->phone,$request->town,$request->car_manufacturer,$request->car_model,$request->year_manufacturer);
+            $result= $order->saveOrder($request->name,$request->phone,$request->town,$request->car_manufacturer,$request->car_model,$request->year_manufacture);
 
             if($result){
                 session()->flash('success','Ваш заказ принят в обработку. Наш менеджер свяжется с вами в ближайшее время.');
