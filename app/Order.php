@@ -20,12 +20,15 @@ class Order extends Model
         }
         return $sum;
     }
-    public function saveOrder($name,$phone,$town){
+    public function saveOrder($name,$phone,$town,$car_manufacturer,$car_model,$year_manufacturer){
 
         if($this->status==0) {
             $this->name = $name;
             $this->phone = $phone;
             $this->town = $town;
+            $this->car_manufacturer = $car_manufacturer;
+            $this->car_model = $car_model;
+            $this->year_manufacturer = $year_manufacturer;
             $this ->status=1;
             $this ->save();
             session()->forget('orderId');
